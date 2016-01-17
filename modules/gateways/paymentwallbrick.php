@@ -17,7 +17,9 @@ function paymentwallbrick_nolocalcc() {}
 	
 	
 function paymentwallbrick_capture($params) {
-  require_once(dirname(__FILE__) . "/paymentwallbrick/lib/paymentwall.php");
+  if (!class_exists("Paymentwall_Config")) {
+    require_once(dirname(__FILE__) . "/paymentwallbrick/lib/paymentwall.php");
+  }
   
   if ($params["test_mode"] == "on") {
     Paymentwall_Config::getInstance()->set(array(
@@ -73,7 +75,10 @@ function paymentwallbrick_capture($params) {
 }
 
 function paymentwallbrick_refund($params) {
-  require_once(dirname(__FILE__) . "/paymentwallbrick/lib/paymentwall.php");
+  if (!class_exists("Paymentwall_Config")) {
+    require_once(dirname(__FILE__) . "/paymentwallbrick/lib/paymentwall.php");
+  }
+
   if ($params["test_mode"] == "on") {
     Paymentwall_Config::getInstance()->set(array(
       'api_type' => Paymentwall_Config::API_GOODS,
@@ -112,7 +117,10 @@ function paymentwallbrick_storeremote($params) {
   $systemurl = ($CONFIG['SystemSSLURL']) ? $CONFIG['SystemSSLURL'].'/' : $CONFIG['SystemURL'].'/';
 
   
-  require_once(dirname(__FILE__) . "/paymentwallbrick/lib/paymentwall.php");
+  if (!class_exists("Paymentwall_Config")) {
+    require_once(dirname(__FILE__) . "/paymentwallbrick/lib/paymentwall.php");
+  }
+
   
   if ($params["test_mode"] == "on") {
     Paymentwall_Config::getInstance()->set(array(
