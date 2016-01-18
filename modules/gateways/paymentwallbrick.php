@@ -48,6 +48,7 @@ function paymentwallbrick_capture($params) {
       'amount' => $params['amount'],
       'fingerprint' => $_POST['brick_fingerprint'],  
       'token' => $_POST['brick_token'],
+      'plan' => $params["invoiceid"],
       'description' => "Payment of Invoice #" . $params['invoiceid']
     ));	  
     update_query("tblclients", array("cardtype" => $charge->card->type, "gatewayid" =>$charge->card->token,"cardlastfour" => $charge->card->last4), array("id" => $params['clientdetails']['id']));
@@ -59,17 +60,26 @@ function paymentwallbrick_capture($params) {
       'currency' => $params['currency'],
       'capture' => true,
       'amount' => $params['amount'],
+      'plan' => $params["invoiceid"],
       'description' => "Payment of Invoice #" . $params['invoiceid']
     ));	  
   }
   
 
   if ($charge->isSuccessful()) {
-	  return array('status'=>'success', 'transid'=> $charge->id);
+	  if ($charge->isCaptured()) {
+        return array('status'=>'success', 'transid'=> $charge->id);
+      } 
+      elseif ($charge->isUnderReview()) {
+        $_SESSION['paywall_pending_review'] = true;
+        $_SESSION['paymentwall_errors'] = "Your payment is currently under review, you will be notified via email within two minutes if your transaction is approved.";
+        return array('status'=>'error', 'rawdata'=> $errors['error']['message']); 
+      }
   }
   else {
    $response = $charge->getPublicData();
    $errors = json_decode($response, true);
+   $_SESSION['paymentwall_errors'] = $errors['error']['message'];
    return array('status'=>'error', 'rawdata'=> $errors['error']['message']); 
   }
 }

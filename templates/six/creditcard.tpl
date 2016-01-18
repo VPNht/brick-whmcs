@@ -48,7 +48,11 @@
   
   });
 </script>
-  
+{if $paymentwall_pendingreview}
+  {if $paymentwall_errors}
+      <div class="alert alert-danger">{$paymentwall_errors}</div>
+  {/if}
+{else}  
     <form method="post" action="creditcard.php" class="form-horizontal" role="form" id="brick-creditcard-form">
         <input type="hidden" name="action" value="submit" />
         <input type="hidden" name="invoiceid" value="{$invoiceid}" />
@@ -58,6 +62,10 @@
 
                 {if $errormessage}
                     {include file="$template/includes/alert.tpl" type="error" errorshtml=$errormessage}
+                {/if}
+                
+                {if $paymentwall_errors}
+                  <div class="alert alert-danger">{$paymentwall_errors}</div>
                 {/if}
 
                 <div id="payment-errors" class="alert alert-danger" style="display:none;"></div>
@@ -232,3 +240,4 @@
         </div>
 
     </form>
+ {/if}
