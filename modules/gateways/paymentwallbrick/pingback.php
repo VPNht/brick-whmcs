@@ -46,6 +46,37 @@
    logTransaction($gatewayParams["name"],var_export($charge,true), "Charge Declined via PingBack");
    sendMessage( "Credit Card Payment Failed", $invoiceId);
   }
+  elseif($status == 2) {
+    if (!function_exists( "ServerTerminateAccount" )) {
+	  require ROOTDIR . "/includes/modulefunctions.php";
+    }
+    if (!function_exists( "closeClient" )) {
+      require ROOTDIR . "/includes/clientfunctions.php";
+      require ROOTDIR . "/includes/ccfunctions.php";
+    }
+    $reason = $_GET['reason'];
+    if ($reason == 1 || $reason == 2 || $reason == 3) {
+	  $invoice_items = select_query("tblinvoiceitems","relid,userid",array("type" => "Hosting", "invoiceid" => $invoice_id));
+	  while ($item = mysql_fetch_array($invoice_items)) {
+		  echo var_dump($item);
+		if (isset($item["relid"]) && $item["relid"] != 0) {
+  	      $result = ServerTerminateAccount($item["relid"]);	
+	    }
+		$userid = $item["userid"];  
+	  }
+	  closeClient($userid);
+    }
+    elseif($reason == 9) {
+	  $invoice_items = select_query("tblinvoiceitems","relid,userid",array("type" => "Hosting", "invoiceid" => $invoice_id));
+	  while ($item = mysql_fetch_array($invoice_items)) {
+		$userid = $item["userid"];  
+	    ServerTerminateAccount($item["relid"]);
+	  }
+	  $transid = get_query_val("tblaccounts","id", array("transid" => $charge_id));
+	  $result = refundInvoicePayment( $transid, null, false, false, false, null );
+    }
+  }
   echo "OK";
+  
   	
 ?>
