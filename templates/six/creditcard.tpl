@@ -27,7 +27,7 @@
     brick.tokenizeCard({
       card_number: $('#inputCardNumber').val(),
       card_expiration_month: $('#inputCardExpiry').val(),
-      card_expiration_year: $('#inputCardExpiry').val(),
+      card_expiration_year: $('#inputCardExpiryYear').val(),
       card_cvv: $('#inputCardCvv').val()
     }, function(response) {
       if (response.type == 'Error') {
