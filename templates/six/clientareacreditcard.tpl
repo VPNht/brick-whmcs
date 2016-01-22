@@ -13,7 +13,7 @@
     e.preventDefault();
     $form.find('button').prop('disabled', true);
     
-    if ($('#inputCardCvv').val() == "") {
+    if ($('#inputCardCVV').val() == "") {
 	  $("#payment-errors").html("You must enter a CVV number");
       $("#payment-errors").show();
 	  return false;
@@ -23,7 +23,7 @@
       card_number: $('#inputCardNumber').val(),
       card_expiration_month: $('#inputCardExpiry').val(),
       card_expiration_year: $('#inputCardExpiry').val(),
-      card_cvv: $('#inputCardCvv').val()
+      card_cvv: $('#inputCardCVV').val()
     }, function(response) {
       if (response.type == 'Error') {
         // handle errors
