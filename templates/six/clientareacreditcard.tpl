@@ -22,7 +22,7 @@
     brick.tokenizeCard({
       card_number: $('#inputCardNumber').val(),
       card_expiration_month: $('#inputCardExpiry').val(),
-      card_expiration_year: $('#inputCardExpiry').val(),
+      card_expiration_year: $('#inputCardExpiryYear').val(),
       card_cvv: $('#inputCardCVV').val()
     }, function(response) {
       if (response.type == 'Error') {
@@ -103,18 +103,18 @@
         <div class="form-group">
             <label for="inputCardNumber" class="col-sm-4 control-label">{$LANG.creditcardcardnumber}</label>
             <div class="col-sm-6">
-                <input type="number" class="form-control" id="inputCardNumber" autocomplete="off" />
+                <input type="text" data-brick="card-number" class="form-control newccinfo" id="inputCardNumber" autocomplete="off" />
             </div>
         </div>
         <div class="form-group">
             <label for="inputCardExpiry" class="col-sm-4 control-label">{$LANG.creditcardcardexpires}</label>
             <div class="col-sm-6">
-                <select name="ccexpirymonth" id="inputCardExpiry" class="form-control select-inline">
+                <select name="ccexpirymonth" id="inputCardExpiry" data-brick="card-expiration-month" class="form-control select-inline">
                     {foreach from=$months item=month}
                     <option{if $ccstartmonth eq $month} selected{/if}>{$month}</option>
                     {/foreach}
                 </select>
-                <select name="ccexpiryyear" class="form-control select-inline">
+                <select name="ccexpiryyear" id="inputCardExpiryYear" data-brick="card-expiration-year" class="form-control select-inline">
                     {foreach from=$expiryyears item=year}
                     <option{if $ccstartyear eq $year} selected{/if}>{$year}</option>
                     {/foreach}
