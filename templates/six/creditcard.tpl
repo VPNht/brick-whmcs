@@ -149,18 +149,18 @@
                 <div class="form-group cc-details{if !$addingNewCard} hidden{/if}">
                     <label for="inputCardNumber" class="col-sm-4 control-label">{$LANG.creditcardcardnumber}</label>
                     <div class="col-sm-7">
-                        <input type="number" id="inputCardNumber" size="30" autocomplete="off" class="form-control newccinfo" />
+                        <input type="text" data-brick="card-number" id="inputCardNumber" size="30" autocomplete="off" class="form-control newccinfo" />
                     </div>
                 </div>
                 <div class="form-group cc-details{if !$addingNewCard} hidden{/if}">
                     <label for="inputCardExpiry" class="col-sm-4 control-label">{$LANG.creditcardcardexpires}</label>
                     <div class="col-sm-8">
-                        <select name="ccexpirymonth" id="inputCardExpiry" class="form-control select-inline">
+                        <select name="ccexpirymonth" data-brick="card-expiration-month" id="inputCardExpiry" class="form-control select-inline">
                             {foreach from=$months item=month}
                                 <option{if $ccexpirymonth eq $month} selected{/if}>{$month}</option>
                             {/foreach}
                         </select>
-                        <select name="ccexpiryyear" id="inputCardExpiryYear" class="form-control select-inline">
+                        <select name="ccexpiryyear" data-brick="card-expiration-year" id="inputCardExpiryYear" class="form-control select-inline">
                             {foreach from=$expiryyears item=year}
                                 <option{if $ccexpiryyear eq $year} selected{/if}>{$year}</option>
                             {/foreach}
