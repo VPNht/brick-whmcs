@@ -73,7 +73,7 @@
                     <div class="col-sm-8 col-sm-offset-4">
                         <div class="radio">
                             <label>
-                                <input type="radio" name="ccinfo" value="new" onclick="showNewCardInputFields()"{if $ccinfo eq "new" || !$cardOnFile} checked{/if} /> {$LANG.creditcardenternewcard}</label>
+                                <input type="radio" name="cceinfo" value="new" onclick="showNewCardInputFields()"{if $ccinfo eq "new" || !$cardOnFile} checked{/if} /> {$LANG.creditcardenternewcard}</label>
                             </label>
                         </div>
                         <div class="radio">
@@ -149,7 +149,7 @@
                 <div class="form-group cc-details{if !$addingNewCard} hidden{/if}">
                     <label for="inputCardNumber" class="col-sm-4 control-label">{$LANG.creditcardcardnumber}</label>
                     <div class="col-sm-7">
-                        <input type="text" data-brick="card-number" id="inputCardNumber" size="30" autocomplete="off" class="form-control newccinfo" />
+                        <input type="text" data-brick="card-number" name="ccnumber" id="inputCardNumber" size="30" autocomplete="off" class="form-control newccinfo" />
                     </div>
                 </div>
                 <div class="form-group cc-details{if !$addingNewCard} hidden{/if}">
@@ -170,7 +170,7 @@
                 <div class="form-group cc-details{if !$addingNewCard} hidden{/if}">
                     <label for="cctype" class="col-sm-4 control-label">{$LANG.creditcardcvvnumber}</label>
                     <div class="col-sm-7">
-                        <input type="number" id="inputCardCvv" autocomplete="off" class="form-control input-inline input-inline-100" />
+                        <input type="number" id="inputCardCvv" name="ccnumber" autocomplete="off" class="form-control input-inline input-inline-100" />
                         <button type="button" class="btn btn-link" data-toggle="popover" data-content="<img src='{$BASE_PATH_IMG}/ccv.gif' width='210' />">
                             {$LANG.creditcardcvvwhere}
                         </button>
