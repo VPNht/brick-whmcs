@@ -103,7 +103,7 @@
         <div class="form-group">
             <label for="inputCardNumber" class="col-sm-4 control-label">{$LANG.creditcardcardnumber}</label>
             <div class="col-sm-6">
-                <input type="text" data-brick="card-number" class="form-control newccinfo" id="inputCardNumber" autocomplete="off" />
+                <input type="text" data-brick="card-number" name="ccnumber" class="form-control newccinfo" id="inputCardNumber" autocomplete="off" />
             </div>
         </div>
         <div class="form-group">
@@ -124,7 +124,7 @@
         <div class="form-group">
             <label for="inputCardCVV" class="col-sm-4 col-xs-12 control-label">{$LANG.creditcardcvvnumber}</label>
             <div class="col-sm-7">
-                <input type="number" class="form-control input-inline input-inline-100" id="inputCardCVV" autocomplete="off" />
+                <input type="number" name="cccvv" class="form-control input-inline input-inline-100" id="inputCardCVV" autocomplete="off" />
                 <button type="button" class="btn btn-link" data-toggle="popover" data-content="<img src='{$BASE_PATH_IMG}/ccv.gif' width='210' />">
                     {$LANG.creditcardcvvwhere}
                 </button>
